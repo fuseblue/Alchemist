@@ -72,9 +72,6 @@
         
         <meta name="text:Sidebar Text Widget" content="">
         <meta name="if:Twitter Widget" content="0"/>
-        <meta name="text:Soundcloud Widget Title" content="Soundcloud">
-        <meta name="text:Soundcloud Widget URL" content=""/>
-        <meta name="if:Soundcloud Widget Autoplay" content="0"/>
         <meta name="if:Site Preloader" content="1"/> 
         
         
@@ -104,7 +101,7 @@
         <meta name="text:Google Analytics ID" content=''/>
         
         
-    <meta name="select:Google Font" content="Karla" Title="Karla"/><meta name="select:Google Font" content="Arial" title="Arial"/><meta name="select:Google Font" content="courier new" title="Courier"/><meta name="select:Google Font" content="Domine" title="Domine"/><meta name="select:Google Font" content="Droid Sans" title="Droid Sans"/><meta name="select:Google Font" content="Droid Serif" title="Droid Serif"/><meta name="select:Google Font" content="Georgia" title="Georgia"/><meta name="select:Google Font" content="Helvetica Neue" title="Helvetica Neue"/><meta name="select:Google Font" content="Lato" title="Lato"/><meta name="select:Google Font" content="Libre Baskerville" title="Libre Baskerville"/><meta name="select:Google Font" content="Lora" title="Lora"/><meta name="select:Google Font" content="Mako" title="Mako"/><meta name="select:Google Font" content="Merriweather" title="Merriweather"/><meta name="select:Google Font" content="Muli" title="Muli"/><meta name="select:Google Font" content="Montserrat" title="Montserrat"/><meta name="select:Google Font" content="Noto Sans" title="Noto Sans"/><meta name="select:Google Font" content="Oswald" title="Oswald"/><meta name="select:Google Font" content="Playfair Display" title="Playfair Display"/><meta name="select:Google Font" content="PT Mono" title="PT Mono"/><meta name="select:Google Font" content="PT Sans" title="PT Sans"/><meta name="select:Google Font" content="PT Serif" title="PT Serif"/><meta name="select:Google Font" content="Raleway" title="Raleway"/><meta name="select:Google Font" content="Roboto" title="Roboto"/><meta name="select:Google Font" content="Roboto Condensed" title="Roboto Condensed"/><meta name="select:Google Font" content="Roboto Slab" title="Roboto Slab"/><meta name="select:Google Font" content="Source Sans Pro" title="Source Sans Pro"/><meta name="select:Google Font" content="Times New Roman" title="Times New Roman"/>
+    <meta name="select:Google Font" content="Libre Baskerville" title="Libre Baskerville"/><meta name="select:Google Font" content="Karla" Title="Karla"/><meta name="select:Google Font" content="Arial" title="Arial"/><meta name="select:Google Font" content="courier new" title="Courier"/><meta name="select:Google Font" content="Domine" title="Domine"/><meta name="select:Google Font" content="Droid Sans" title="Droid Sans"/><meta name="select:Google Font" content="Droid Serif" title="Droid Serif"/><meta name="select:Google Font" content="Georgia" title="Georgia"/><meta name="select:Google Font" content="Helvetica Neue" title="Helvetica Neue"/><meta name="select:Google Font" content="Lato" title="Lato"/><meta name="select:Google Font" content="Lora" title="Lora"/><meta name="select:Google Font" content="Mako" title="Mako"/><meta name="select:Google Font" content="Merriweather" title="Merriweather"/><meta name="select:Google Font" content="Muli" title="Muli"/><meta name="select:Google Font" content="Montserrat" title="Montserrat"/><meta name="select:Google Font" content="Noto Sans" title="Noto Sans"/><meta name="select:Google Font" content="Oswald" title="Oswald"/><meta name="select:Google Font" content="Playfair Display" title="Playfair Display"/><meta name="select:Google Font" content="PT Mono" title="PT Mono"/><meta name="select:Google Font" content="PT Sans" title="PT Sans"/><meta name="select:Google Font" content="PT Serif" title="PT Serif"/><meta name="select:Google Font" content="Raleway" title="Raleway"/><meta name="select:Google Font" content="Roboto" title="Roboto"/><meta name="select:Google Font" content="Roboto Condensed" title="Roboto Condensed"/><meta name="select:Google Font" content="Roboto Slab" title="Roboto Slab"/><meta name="select:Google Font" content="Source Sans Pro" title="Source Sans Pro"/><meta name="select:Google Font" content="Times New Roman" title="Times New Roman"/>
         
         <meta name="select:Logo Text" content="uppercase" Title="Uppercase"/><meta name="select:Logo Text" content="normal" Title="Normal"/><meta name="select:Logo Text" content="lowercase" Title="Lowercase"/>
         
@@ -135,7 +132,7 @@
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.css' rel='stylesheet' type='text/css'>
     <link href="http://static.tumblr.com/b5aw2yz/VW3nj01lh/twemoji-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family={select:Google Font}:400,400italic,700,700italic">
-    <link href="http://static.tumblr.com/evx2wil/yd7o6erl6/core.css" rel="stylesheet">
+    <link href="http://static.tumblr.com/evx2wil/Mgio6f49u/core.css" rel="stylesheet">
     
     <style type="text/css">
         
@@ -966,33 +963,7 @@
                 <p>{text:Sidebar Text Widget}</p>
             </div>
         {/block:IfSidebarTextWidget}
-        
-        {block:IfSoundcloudWidgetURL}
-            <h3>{text:Soundcloud Widget Title}</h3> 
-            <div id="fuse-sc-player" class="widget cl" style="opacity:1;">
-                <div class="sc-meta cl">
-                    <div class="img">
-                        <i class="fa fa-play" style="opacity: 0;"></i>
-                    </div>
-                    <div class="sc-info">
-                        <p class="artist"></p>
-                        <p class="track"></p>
-                    </div>
-                </div>
-                <div class="sc-controls">
-                    <div class="pause-play">
-                        <i class="fa fa-pause"></i>
-                    </div>
-                    <div class="prev">
-                        <i class="fa fa-step-backward"></i>
-                    </div>
-                    <div class="next">
-                        <i class="fa fa-step-forward"></i>
-                    </div>
-                </div>
-            </div>
-        {/block:IfSoundcloudWidgetURL}
-        
+
         {block:IfInstagramWidgetUserID}
         <div class="instagram widget cl"> 
             <h3>{text:Instagram Widget Title}</h3> 
@@ -1023,7 +994,7 @@
         
         
         <p class="footer">
-        <a href="http://fuseblue.com" target="_blank">Initiation by Fuse</a></br>
+        <a href="http://fuseblue.com/themes/alchemist/" target="_blank">Alchemist by Fuse</a></br>
         </p>
         
         </div>
@@ -1343,12 +1314,7 @@
     <script type="text/javascript" src="http://static.tumblr.com/evx2wil/Dqoo6ermi/alchemist.js"></script>
     <script src="http://static.tumblr.com/evx2wil/gI7o6erm1/modal.js"></script>
     <script src="http://static.tumblr.com/evx2wil/Auro6erma/ants.js"></script>
-    
-    {block:IfSoundcloudWidgetURL}
-        <script src="https://w.soundcloud.com/player/api.js"></script>
 
-    {/block:IfSoundcloudWidgetURL}
-    
     {block:IfTypeKitID}
         <!-- Typekit -->
         <script type="text/javascript" src="//use.typekit.net/{text:TypeKit ID}.js"></script>
@@ -1390,9 +1356,7 @@
                         $(this).find("a.reblog_button").append(reblogSvg);
                     });
                     $(".fuse-header .head-top").append( $(".fuse-header .head nav").clone() );
-                    {block:IfSoundcloudWidgetURL}
-                        $.fuseSC({block:IfSoundcloudWidgetAutoplay}true{/block:IfSoundcloudWidgetAutoplay});
-                    {/block:IfSoundcloudWidgetURL}
+
                 });
             })(window.jQuery);
             {block:IfSitePreloader}
@@ -1461,9 +1425,6 @@
         {/block:IfDribbbleWidgetAccessToken}
     </script>
 
-    {block:IfSoundcloudWidgetURL}
-        <iframe id="fuse-sc" src="https://w.soundcloud.com/player/?url={text:Soundcloud Widget URL}" width="100%" height="465" scrolling="no" frameborder="no"></iframe>
-    {/block:IfSoundcloudWidgetURL}
 
     {block:Twitter}
         <script src="/tweets.js"></script>    
