@@ -238,11 +238,15 @@
         }
         
         
-        .post-meta a, .view-notes-link a, .post-like {
+        .post-meta a, .view-notes-link a {
             color:{color:Text};
         }
         
-
+        {block:IfNotShowPostMeta}
+            .note-count {
+                display:none;
+            }
+        {/block:IfNotShowPostMeta}
         
         
         /*Custom CSS*/
