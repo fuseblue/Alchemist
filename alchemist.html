@@ -134,7 +134,7 @@
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css' rel='stylesheet' type='text/css'>
     <link href="http://static.tumblr.com/b5aw2yz/VW3nj01lh/twemoji-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family={select:Google Font}:400,400italic,700,700italic">
-    <link href="http://static.tumblr.com/evx2wil/iePo7xytm/core.css" rel="stylesheet">
+    <link href="http://static.tumblr.com/evx2wil/GNdo89wa0/core.css" rel="stylesheet">
     
     <style type="text/css">
         
@@ -722,6 +722,23 @@
                 color: #fff;
                 transition: color .3s;
             }
+            {block:IfNotShowPostMeta}
+                .note-count, #fuse-ants .meta-left, #fuse-ants .post-meta .share {
+                    display:none;
+                }
+            {/block:IfNotShowPostMeta}
+            
+            {block:IfNotShowPostTags}
+                #fuse-ants .post .tags {
+                    display:none;
+                }
+            {/block:IfNotShowPostTags}
+            
+            {block:IfNotShowPostCaption}
+                #fuse-ants .post-photo .content, #fuse-ants .post-photoset .content {
+                    display:none;
+                }
+            {/block:IfNotShowPostCaption}
     </style>
 
 </head>
@@ -744,6 +761,14 @@
                 </g>
             </svg>
             </div>
+            
+            <div class='fuse-caption'>
+                <a class="mobile-close more-toggle">Close</a>
+                <div class="inner">
+                    
+                </div>
+            </div>
+            
             <div class='fuse-border-left'>
             <div class="more">
                 <ul>
@@ -754,12 +779,7 @@
                     </div>
                 </ul>
             </div>
-            <div class='fuse-caption'>
-                <a class="mobile-close more-toggle">Close</a>
-                <div class="inner">
-                    
-                </div>
-            </div>
+
             </div>
             <div class='fuse-border-right'>
                 <div class="tum-meta">
@@ -853,7 +873,6 @@
                     {block:ifRSSLink}
                         <li><a href="{RSS}" title="{lang:RSS}">{lang:RSS}</a></li>
                     {/block:ifRSSLink}
-                    <li><a href="http://fuseblue.com/themes/alchemist">Theme</a></li>
                 </ul>
                 <ul class="{block:ifsociallinksicons}social-links-icons{/block:ifsociallinksicons} social-links">
                     
@@ -867,7 +886,7 @@
                     {block:ifFlickrURL}<li><a href="{text:Flickr URL}"><i class="fa fa-flickr"></i><span>Flickr</span></a></li>{/block:ifFlickrURL}   
                     {block:ifLinkedinURL}<li><a href="{text:Linkedin URL}"><i class="fa fa-linkedin"></i><span></span>Linkedin</span></a></li>{/block:ifLinkedinURL}    
                     {block:ifPinterestURL}<li><a href="{text:Pinterest URL}"><i class="fa fa-pinterest"></i><span>Pinterest</span></a></li>{/block:ifPinterestURL}    
-                    {block:ifVimeoURL}<li><a href="{text:Vimeo URL}"><i class="fa fa-vimeo"></i><span>Vimeo</span></a></li>{/block:ifVimeoURL}   
+                    {block:ifVimeoURL}<li><a href="{text:Vimeo URL}"><i class="fa fa-vimeo"></i><span>Vimeo</span></a></li>{/block:ifVimeoURL}
                     
                 </ul>
             </nav>
@@ -1036,105 +1055,153 @@
     <div id="fuse" class="page {block:PermalinkPage}single {/block:PermalinkPage}">
         <div id="posts">
             <div class="wrap">
-                {block:PermalinkPage}
+                {block:IndexPage}
+                <div id="fuse-ants">
+                <div class="ants-sizer-six"></div>
+                <div class="ants-gutter-six"></div>
+                {/block:IndexPage}
                 {block:Posts}
-                    <input id="post-notes-url" type="hidden" value="{PostNotesURL}">
                     
                     {block:Photo}
-                    <article id="{PostID}" class="{block:IndexPage}post modal post-photo pp{/block:IndexPage}{block:PermalinkPage}{block:Date} post-single{/block:Date}{/block:PermalinkPage}" data-id="{PostID}" data-notes="{PostNotesURL}" data-pt="photo">
+                    <article id="ant-{PostID}" class="{block:IndexPage}ants-item-six post post-photo {block:HasTags}{block:Tags} {Tag}{/block:Tags}{/block:HasTags}{/block:IndexPage}{block:PermalinkPage}{block:Date} post-single{/block:Date}{/block:PermalinkPage}" data-id="{PostID}" data-notes="{PostNotesURL}" data-pt="photo">
+                        <input id="post-notes-url" type="hidden" value="{PostNotesURL}">
                         <div class="inner">
-                            <div class="media">
-                            
                                 {block:IndexPage}
-                                    <a href="{Permalink}" data-id="{PostID}">
-
+                                <div class="inside">
+                                    <a class="open-modal" href="{Permalink}" data-id="{PostID}">
+                                        <div class="overlay-bg"></div>
                                         <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}" />
                                     </a>
+                                </div>
+                                
+                                <div class="overlay">
+                                    <div class="note-count">
+                                        <a class="open-modal" data-id="{PostID}">
+                                        {block:NoteCount}{NoteCountWithLabel}{/block:NoteCount}
+                                        </a>
+                                    </div>
+                                    
+                                    <div class="post-share">
+                                        <div class="close-post-share">
+                                            <i class="fa fa-times"></i>
+                                        </div>
+                                        <div class="social-media">
+                                            <span class="share-facebook tooltip" title="Share on Facebook"><a class="share-icon-facebook" href="https://www.facebook.com/sharer.php?u={Permalink}{block:Title}&t={Title}{/block:Title}" target="_new"></a></span>
+                                            <span class="share-twitter tooltip" title="Share on Twitter"><a class="share-icon-twitter" href="https://twitter.com/intent/tweet?url={ShortURL}" target="_new"></a></span>
+                                            <span class="share-pinterest tooltip" title="Share on Pinterest"><a class="share-icon-pinterest" target="_new" href="http://pinterest.com/pin/create/button/?url={Permalink}&media={PhotoURL-500}"></a></span> 
+                                            <span class="share-google tooltip" title="Share on Google+"><a class="share-icon-google-plus" href="https://plus.google.com/share?url={Permalink}" target="_new"></a></span>
+                                        </div>
+                                        <div class="social-media-footer">
+                                            <a class="btn copy-btn" data-clipboard-text="{Permalink}">Copy</a>
+                                        </div>
+                                    </div>
+                                    <ul class="share index">
+                                        <li class="share-toggle tooltip" title="Share this post">
+                                            <i class="fa fa-share"></i>
+                                        </li>
+                                        <li class="post-like tooltip" title="Like this post">
+                                            {LikeButton color="grey" size="15"}
+                                            <i class="fa fa-heart"></i>
+                                        </li>
+                                        <li class="post-reblog tooltip" title="Reblog this post">
+                                            <a href="{ReblogURL}"><i class="fa fa-lg fa-retweet"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
                                 {/block:IndexPage}
                             
                                 {block:PermalinkPage}
-                                {LinkOpenTag}
-
-                                    <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}" />
-                                {LinkCloseTag}
+                                    {LinkOpenTag}
+                                        <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}" />
+                                    {LinkCloseTag}
                                 {/block:PermalinkPage}
                             </div>      
                             
-                            <div class="content">
-                                {block:Caption}{Caption}{/block:Caption}
-                            </div>
                     {/block:Photo}
         
                 
         
                     {block:Text}
-                    <article id="{PostID}" class="{block:IndexPage}post modal post-text{/block:IndexPage}" data-id="{PostID}" data-notes="{PostNotesURL}" data-pt="text">
-                        <div class="inner">
-                        
-                            <div class="content">
-                                {block:Title}<h2 class="post-title"><a href="{Permalink}" title="{lang:Continue reading} {lang:Post}">{Title}</a></h2>{/block:Title}
+                    <article id="ant-{PostID}" class="{block:IndexPage}ants-item-six post post-text {block:HasTags}{block:Tags} {Tag}{/block:Tags}{/block:HasTags}{/block:IndexPage}{block:PermalinkPage}{block:Date} post-single{/block:Date}{/block:PermalinkPage}" data-id="{PostID}" data-notes="{PostNotesURL}" data-pt="text">
+                    <input id="post-notes-url" type="hidden" value="{PostNotesURL}">
+                        <div class="inside">
+
+                                {block:Title}<h3><a href="{Permalink}" title="{lang:Continue reading} {lang:Post}">{Title}</a></h3>{/block:Title}
                                 {Body}
-                            </div>
+                        </div>
                     {/block:Text}        
         
         
         
-                    {block:Audio}      
-                    <article id="{PostID}" class="{block:IndexPage}post modal post-audio{/block:IndexPage}" data-id="{PostID}" data-notes="{PostNotesURL}" data-pt="audio">
-                        <div class="inner">
+                    {block:Audio}
+                    <article id="ant-{PostID}" class="{block:IndexPage}ants-item-six post post-audio {block:HasTags}{block:Tags} {Tag}{/block:Tags}{/block:HasTags}{/block:IndexPage}{block:PermalinkPage}{block:Date} post-single{/block:Date}{/block:PermalinkPage}" data-id="{PostID}" data-notes="{PostNotesURL}" data-pt="audio">
+                    <input id="post-notes-url" type="hidden" value="{PostNotesURL}">
+                        <div class="inside">
                         
                             <div class="media">
                                 <div class="albumart">{block:AlbumArt}<img src="{AlbumArtURL}" width="500" height="500"/>{/block:AlbumArt}</div>
                                 <div class="player">{AudioPlayerBlack}</div>
                                 {block:AudioEmbed}{AudioEmbed}{/block:AudioEmbed}
                             </div>
+                        </div>
                     {/block:Audio}      
         
         
     
                     {block:Video}
-                    <article id="{PostID}" class="{block:IndexPage}post modal post-video{/block:IndexPage}" data-id="{PostID}" data-notes="{PostNotesURL}" data-pt="video">
-                        <div class="inner">
+                    <article id="ant-{PostID}" class="{block:IndexPage}ants-item-six post post-video {block:HasTags}{block:Tags} {Tag}{/block:Tags}{/block:HasTags}{/block:IndexPage}{block:PermalinkPage}{block:Date} post-single{/block:Date}{/block:PermalinkPage}" data-id="{PostID}" data-notes="{PostNotesURL}" data-pt="video">
+                    <input id="post-notes-url" type="hidden" value="{PostNotesURL}">
+                        <div class="inside">
                             <div class="media">{Video-500}</div>
         
-                            <div class="content">
+
                                 {block:Caption}{Caption}{/block:Caption}
-                            </div>
+
+                        </div>
                     {/block:Video}
             
         
                     {block:Quote}
-                        <article id="{PostID}" class="{block:IndexPage}post modal post-quote{/block:IndexPage} post-quote" data-id="{PostID}" data-notes="{PostNotesURL}" data-pt="quote">
-                            <div class="inner">
-                                <div class="content">
+                    <article id="ant-{PostID}" class="{block:IndexPage}ants-item-six post post-quote {block:HasTags}{block:Tags} {Tag}{/block:Tags}{/block:HasTags}{/block:IndexPage} post-quote{block:PermalinkPage}{block:Date} post-single{/block:Date}{/block:PermalinkPage}" data-id="{PostID}" data-notes="{PostNotesURL}" data-pt="quote">
+                            <div class="inside">
+
                                     <blockquote>{Quote}</blockquote>
                                     <figcaption>{block:Source}- {Source}{/block:Source}</figcaption>
-                                </div>
+                            
+                            </div>
+
                     {/block:Quote}      
                 
             
                      {block:Link}
-                        <article id="{PostID}" class="{block:IndexPage}post modal post-link{/block:IndexPage}" data-id="{PostID}" data-notes="{PostNotesURL}" data-pt="link">
-                            <div class="inner">
-                                <div class="content">
-                                    <h1><a class="link" href="{URL}">{Name}</a></h1>
-                                    {block:Description}{Description}{/block:Description}
-                                </div>
+                    <article id="ant-{PostID}" class="{block:IndexPage}ants-item-six post post-link {block:HasTags}{block:Tags} {Tag}{/block:Tags}{/block:HasTags}{/block:IndexPage}{block:PermalinkPage}{block:Date} post-single{/block:Date}{/block:PermalinkPage}" data-id="{PostID}" data-notes="{PostNotesURL}" data-pt="link">
+                    <input id="post-notes-url" type="hidden" value="{PostNotesURL}">
+                            <div class="inside">
+      
+                                <h2><a class="link" href="{URL}">{Name}</a></h2>
+                                {block:Description}{Description}{/block:Description}
+                            </div>
+
                     {/block:Link}   
       
            
                     {block:Chat}
-                    <article id="{PostID}" class="{block:IndexPage}post modal post-chat{/block:IndexPage}" data-id="{PostID}" data-notes="{PostNotesURL}" data-pt="chat"> 
-                        <div class="content">
+                    <article id="ant-{PostID}" class="{block:IndexPage}ants-item-six post post-chat {block:HasTags}{block:Tags} {Tag}{/block:Tags}{/block:HasTags}{/block:IndexPage}{block:PermalinkPage}{block:Date} post-single{/block:Date}{/block:PermalinkPage}" data-id="{PostID}" data-notes="{PostNotesURL}" data-pt="chat"> 
+                    <input id="post-notes-url" type="hidden" value="{PostNotesURL}">
+                        <div class="inside">
                             <ul class="chat">
                                 {block:Lines}<li class="{Alt}">{block:Label}<span class="person">{Label}</span>{/block:Label}<span class="said"> {Line} </span></li>{/block:Lines}
                             </ul>
                         </div>
+
                     {/block:Chat}   
                 
                 
+
                     {block:Photoset}
-                        <article id="{PostID}" class="{block:IndexPage}post modal post-photoset pp{/block:IndexPage}" data-id="{PostID}"  data-notes="{PostNotesURL}" data-pt="photoset">
+                        <article id="ant-{PostID}" class="{block:IndexPage}ants-item-six post modal post-photoset {block:HasTags}{block:Tags} {Tag}{/block:Tags}{/block:HasTags}{/block:IndexPage}" data-id="{PostID}"  data-notes="{PostNotesURL}" data-pt="photoset">
+                        <input id="post-notes-url" type="hidden" value="{PostNotesURL}">
                                 <div class="media">
                                     <div class="fuse-photoset ips">
                                         <div class="ps-nav-left"></div>
@@ -1158,9 +1225,10 @@
                     
                     
                     {block:Answer}
-                    <article id="{PostID}" class="{block:IndexPage}post post-answer{/block:IndexPage}" data-notes="{PostNotesURL}" data-pt="answer">
-                    <div class="inner">
-                        <div class="content">
+                    <article id="ant-{PostID}" class="{block:IndexPage}ants-item-six post post-answer {block:HasTags}{block:Tags} {Tag}{/block:Tags}{/block:HasTags}{/block:IndexPage}{block:PermalinkPage}{block:Date} post-single{/block:Date}{/block:PermalinkPage}" data-id="{PostID}" data-notes="{PostNotesURL}" data-pt="answer">
+                    <input id="post-notes-url" type="hidden" value="{PostNotesURL}">
+                    <div class="inside">
+
                         <div class="asker-box">
                             <img src="{AskerPortraitURL-24}"/><span class="the-asker">{Asker}</span> asked: {Question}
                         </div>
@@ -1168,8 +1236,8 @@
                         <div class="answer">
                             {Answer}
                         </div>
-                        
-                        </div>
+                    </div>
+
                     {/block:Answer}
                     
                     
@@ -1186,16 +1254,16 @@
                     
                     
                             <div class="meta-left">
-                                <a href="{Permalink}" data-id="{PostID}" class="open-post postdate">
+                                <a href="{Permalink}" data-id="{PostID}" class="open-modal postdate">
                                     <time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}">
-                                    {DayOfMonth} {Month} {Year}
-                                    </time> 
+                                    {DayOfMonth} {Month} {Year} 
+                                    </time>
                                 </a>
                     
                             
                     
                                 {block:NoteCount} 
-                                <a href="{Permalink}" data-id="{PostID}" class="postnotes open-post">
+                                <a href="{Permalink}" data-id="{PostID}" class="postnotes open-modal">
                                 {NoteCountWithLabel}
                                 </a>
                                 {/block:NoteCount}
@@ -1232,11 +1300,10 @@
                             <div class="btm{block:PermalinkPagination} perm cl{/block:PermalinkPagination}">
                             </div>
                             
-                        
                             <div class="post-header">
                                 {block:NoteCount} 
                                 <div class="note-count" class="{block:IndexPage}post modal post-photo pp{/block:IndexPage}" data-id="{PostID}" data-notes="{PostNotesURL}" data-pt="photo">
-                                    <a href="{Permalink}" data-id="{PostID}" class="open-post">
+                                    <a href="{Permalink}" data-id="{PostID}" class="open-modal">
                                         <i class="twa twa-heart-eyes"></i> 
                                         <span>{NoteCountWithLabel}</span>
                                     </a>
@@ -1266,8 +1333,8 @@
                                     </div>
                                     
                                     <div class="social-media-footer">
-                                        <a class="open-post" href="{Permalink}" data-id="{PostID}">{Permalink}</a>
-                                        <a class="button copy-button" data-clipboard-text="{Permalink}">Copy</a>
+                                        <a class="open-modal" href="{Permalink}" data-id="{PostID}">{Permalink}</a>
+                                        <a class="btn copy-button" data-clipboard-text="{Permalink}">Copy</a>
                                     </div>
                                 </div>  
                             </div>
@@ -1323,7 +1390,7 @@
                 </article>
         
             {/block:Posts}
-            {/block:PermalinkPage}
+            {block:IndexPage}</div>{/block:IndexPage}
 
             </div>
         </div>
@@ -1338,14 +1405,14 @@
     
 
     
-            <!-- Header Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script type="text/javascript" src="http://static.tumblr.com/evx2wil/4oQo6erls/plugins.js">
+     <!-- Header Scripts -->
+    <script src="https://code.jquery.com/jquery-2.2.2.js" integrity="sha256-4/zUCqiq0kqxhZIyp4G0Gk+AOtCJsY1TA00k5ClsZYE=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://static.tumblr.com/evx2wil/XbVo89w3z/plugins.js">
     </script>
 
-    <script type="text/javascript" src="http://static.tumblr.com/evx2wil/GX3o79yli/alchemist.js"></script>
-    <script src="http://static.tumblr.com/evx2wil/gI7o6erm1/modal.js"></script>
-    <script src="http://static.tumblr.com/evx2wil/Auro6erma/ants.js"></script>
+    <script type="text/javascript" src="http://static.tumblr.com/evx2wil/pRAo89w3c/alchemist.js"></script>
+    <script src="http://static.tumblr.com/evx2wil/qtPo89w2s/modal.js"></script>
+    <script src="http://static.tumblr.com/evx2wil/tUHo89w33/ants.js"></script>
     
     {block:IfSoundcloudWidgetURL}
         <script src="https://w.soundcloud.com/player/api.js"></script>
@@ -1358,52 +1425,61 @@
         <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     {/block:IfTypeKitID}
     
-        <script type="text/javascript">
-            (function($) {
-                TweenLite.to('.page', 0.8, {opacity: 1, y: 0});
-                $(document).ready(function(){
-                    $.fuseAnts();
-                    $('.tooltip').tooltipster({ multiple: true });
-                    $('.tooltip-left').tooltipster({ position: 'left', multiple: true });
-                    $('.fuse-photoset.ips').fuseIPS();
-                    $(window).scroll(function(){
-                        if ($("body").scrollTop() > 50) {
-                            $('#backToTop').css({
-                                'visibility': 'visible',
-                                'opacity': '1'
-                            });
-                        } else {
-                            $('#backToTop').css({
-                                'visibility': 'hidden',
-                                'opacity': '0'
-                            });
-                        }
-                    });
-                    $('#backToTop').on('click', function(){
-                        TweenLite.to( window, .5, {scrollTo:{y: 0 }, ease:Power2.easeOut});
-                    })
-                    $( "li.post-like" ).each(function( index ) {
-                        var likeSvg = $(this).find('.fa');
-                        $(this).find(".like_button").append(likeSvg);
-                    });
-                    $("li.post-reblog:not(.done)").each(function( index ) {
-                        $(this).addClass('done');
-                        $(this).find('a svg').remove();
-                        var reblogSvg = $(this).find('svg.dual-reblog');
-                        $(this).find("a.reblog_button").append(reblogSvg);
-                    });
-                    $(".fuse-header .head-top").append( $(".fuse-header .head nav").clone() );
-                    {block:IfSoundcloudWidgetURL}
-                        $.fuseSC({block:IfSoundcloudWidgetAutoplay}true{/block:IfSoundcloudWidgetAutoplay});
-                    {/block:IfSoundcloudWidgetURL}
+    <script type="text/javascript">
+        (function($) {
+            TweenLite.to('.page', 0.8, {opacity: 1, y: 0});
+            $(document).ready(function(){
+                $.fuseAnts();
+                $('.fuse-photoset.ips').fuseIPS();
+                $(window).scroll(function(){
+                    if ($("body").scrollTop() > 50) {
+                        $('#backToTop').css({
+                            'visibility': 'visible',
+                            'opacity': '1'
+                        });
+                    } else {
+                        $('#backToTop').css({
+                            'visibility': 'hidden',
+                            'opacity': '0'
+                        });
+                    }
                 });
-            })(window.jQuery);
-            {block:IfSitePreloader}
-                $(window).load(function(){
-                    $('#fuse-preloader svg').css('opacity', 1);
+                $('#backToTop').on('click', function(){
+                    TweenLite.to( window, .5, {scrollTo:{y: 0 }, ease:Power2.easeOut});
+                })
+                $( "li.post-like" ).each(function( index ) {
+                    var likeSvg = $(this).find('.fa');
+                    $(this).find(".like_button").append(likeSvg);
                 });
-            {/block:IfSitePreloader}
-        </script>
+                $("li.post-reblog:not(.done)").each(function( index ) {
+                    $(this).addClass('done');
+                    $(this).find('a svg').remove();
+                    var reblogSvg = $(this).find('svg.dual-reblog');
+                    $(this).find("a.reblog_button").append(reblogSvg);
+                });
+                $(".fuse-header .head-top").append( $(".fuse-header .head nav").clone() );
+
+            });
+            
+            $antsIsoCont = $('#fuse-ants');
+            antsIsotope = $antsIsoCont.isotope({
+                transitionDuration: 0,
+                hiddenStyle: {opacity: 0},
+                visibleStyle: {opacity: 0},
+                itemSelector: '.ants-item-six',
+                percentPosition: true,
+                masonry: {
+                    columnWidth: '.ants-sizer-six',
+                    gutter: '.ants-gutter-six' 
+                }
+            });
+        })(window.jQuery);
+        {block:IfSitePreloader}
+            $(window).load(function(){
+                $('#fuse-preloader svg').css('opacity', 1);
+            });
+        {/block:IfSitePreloader}
+    </script>
     
     <script>
         var _gaq=[['_setAccount','{text:Google Analytics ID}'],['_trackPageview']];
