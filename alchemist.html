@@ -990,31 +990,31 @@
             </div>
         {/block:IfSidebarTextWidget}
         
-        {block:IfSoundcloudWidgetURL}
-            <h3>{text:Soundcloud Widget Title}</h3> 
-            <div id="fuse-sc-player" class="widget cl" style="opacity:1;">
-                <div class="sc-meta cl">
-                    <div class="img">
-                        <i class="fa fa-play" style="opacity: 0;"></i>
+            {block:IfSoundcloudWidgetURL}
+                <h3>{text:Soundcloud Widget Title}</h3> 
+                <div id="fuse-sc-player" class="widget cl" style="opacity:1;">
+                    <div class="sc-meta cl">
+                        <div class="img">
+                            <i class="fa fa-play" style="opacity: 0;"></i>
+                        </div>
+                        <div class="sc-info">
+                            <p class="artist"></p>
+                            <p class="track"></p>
+                        </div>
                     </div>
-                    <div class="sc-info">
-                        <p class="artist"></p>
-                        <p class="track"></p>
+                    <div class="sc-controls">
+                        <div class="pause-play">
+                            <i class="fa fa-pause"></i>
+                        </div>
+                        <div class="prev">
+                            <i class="fa fa-step-backward"></i>
+                        </div>
+                        <div class="next">
+                            <i class="fa fa-step-forward"></i>
+                        </div>
                     </div>
                 </div>
-                <div class="sc-controls">
-                    <div class="pause-play">
-                        <i class="fa fa-play"></i>
-                    </div>
-                    <div class="prev">
-                        <i class="fa fa-step-backward"></i>
-                    </div>
-                    <div class="next">
-                        <i class="fa fa-step-forward"></i>
-                    </div>
-                </div>
-            </div>
-        {/block:IfSoundcloudWidgetURL}
+            {/block:IfSoundcloudWidgetURL}
         
         {block:IfInstagramWidgetUserID}
         <div class="instagram widget cl"> 
@@ -1408,16 +1408,23 @@
     
      <!-- Header Scripts -->
     <script src="https://code.jquery.com/jquery-2.2.2.js" integrity="sha256-4/zUCqiq0kqxhZIyp4G0Gk+AOtCJsY1TA00k5ClsZYE=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="http://static.tumblr.com/evx2wil/XbVo89w3z/plugins.js">
+    <script type="text/javascript" src="http://static.tumblr.com/evx2wil/79Mo9i78d/plugins.js">
     </script>
 
     <script type="text/javascript" src="http://static.tumblr.com/evx2wil/pRAo89w3c/alchemist.js"></script>
     <script src="http://static.tumblr.com/evx2wil/qtPo89w2s/modal.js"></script>
-    <script src="http://static.tumblr.com/evx2wil/tUHo89w33/ants.js"></script>
+    <script src="http://static.tumblr.com/evx2wil/J2Xo9i7c9/ants.js"></script>
     
-    {block:IfSoundcloudWidgetURL}
+    {block:IfSoundcloudWidgetURL} 
+        <script src="https://connect.soundcloud.com/sdk/sdk-3.1.2.js"></script>
         <script src="https://w.soundcloud.com/player/api.js"></script>
-
+        <script>
+            soundcloudURL = "{text:Soundcloud Widget URL}";
+            soundcloudClientID = '394aae1023264c7233cb81fab17fe036';
+            // SC.initialize({
+            //     client_id: soundcloudClientID
+            // });
+        </script>
     {/block:IfSoundcloudWidgetURL}
     
     {block:IfTypeKitID}
@@ -1459,7 +1466,9 @@
                     $(this).find("a.reblog_button").append(reblogSvg);
                 });
                 $(".fuse-header .head-top").append( $(".fuse-header .head nav").clone() );
-
+                {block:IfSoundcloudWidgetURL}
+                    $.fuseSC({block:IfSoundcloudWidgetAutoplay}true{/block:IfSoundcloudWidgetAutoplay});
+                {/block:IfSoundcloudWidgetURL}
             });
             
             $antsIsoCont = $('#fuse-ants');
@@ -1542,7 +1551,7 @@
     </script>
 
     {block:IfSoundcloudWidgetURL}
-        <iframe id="fuse-sc" src="https://w.soundcloud.com/player/?url={text:Soundcloud Widget URL}" width="100%" height="465" scrolling="no" frameborder="no"></iframe>
+        <div id="fuse-sc"></div>
     {/block:IfSoundcloudWidgetURL}
 
     {block:Twitter}
