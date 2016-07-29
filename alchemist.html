@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <!-- Alchemist by Fuse.  fuseblue.com, twitter.com/askfuse  -->
 <!-- Help and FAQ: fuseblue.com/help -->
-<!-- Music Mixes: http://soundcloud.com/fuseplaylist/ -->
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head> 
@@ -72,9 +71,6 @@
         <meta name="text:Twitter Widget Feed Count" content="2">
         
         <meta name="text:Sidebar Text Widget" content="">
-        <meta name="text:Soundcloud Widget Title" content="Soundcloud">
-        <meta name="text:Soundcloud Widget URL" content=""/>
-        <meta name="if:Soundcloud Widget Autoplay" content="0"/>
         <meta name="if:Site Preloader" content="1"/> 
         
         
@@ -989,32 +985,6 @@
             </div>
         {/block:IfSidebarTextWidget}
         
-            {block:IfSoundcloudWidgetURL}
-                <h3>{text:Soundcloud Widget Title}</h3> 
-                <div id="fuse-sc-player" class="widget cl" style="opacity:1;">
-                    <div class="sc-meta cl">
-                        <div class="img">
-                            <i class="fa fa-play" style="opacity: 0;"></i>
-                        </div>
-                        <div class="sc-info">
-                            <p class="artist"></p>
-                            <p class="track"></p>
-                        </div>
-                    </div>
-                    <div class="sc-controls">
-                        <div class="pause-play">
-                            <i class="fa fa-pause"></i>
-                        </div>
-                        <div class="prev">
-                            <i class="fa fa-step-backward"></i>
-                        </div>
-                        <div class="next">
-                            <i class="fa fa-step-forward"></i>
-                        </div>
-                    </div>
-                </div>
-            {/block:IfSoundcloudWidgetURL}
-        
         {block:IfInstagramWidgetUserID}
         <div class="instagram widget cl"> 
             <h3>{text:Instagram Widget Title}</h3> 
@@ -1407,24 +1377,12 @@
     
      <!-- Header Scripts -->
     <script src="https://code.jquery.com/jquery-2.2.2.js" integrity="sha256-4/zUCqiq0kqxhZIyp4G0Gk+AOtCJsY1TA00k5ClsZYE=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="http://static.tumblr.com/evx2wil/79Mo9i78d/plugins.js">
+    <script type="text/javascript" src="http://static.tumblr.com/evx2wil/F7Hob3ll9/plugins.js">
     </script>
 
     <script type="text/javascript" src="http://static.tumblr.com/evx2wil/AKnoab6gp/alchemist.js"></script>
     <script src="http://static.tumblr.com/evx2wil/qtPo89w2s/modal.js"></script>
-    <script src="http://static.tumblr.com/evx2wil/J2Xo9i7c9/ants.js"></script>
-    
-    {block:IfSoundcloudWidgetURL} 
-        <script src="https://connect.soundcloud.com/sdk/sdk-3.1.2.js"></script>
-        <script src="https://w.soundcloud.com/player/api.js"></script>
-        <script>
-            soundcloudURL = "{text:Soundcloud Widget URL}";
-            soundcloudClientID = '394aae1023264c7233cb81fab17fe036';
-            // SC.initialize({
-            //     client_id: soundcloudClientID
-            // });
-        </script>
-    {/block:IfSoundcloudWidgetURL}
+    <script src="http://static.tumblr.com/evx2wil/wDnob3lkv/ants.js"></script>
     
     {block:IfTypeKitID}
         <!-- Typekit -->
@@ -1465,9 +1423,6 @@
                     $(this).find("a.reblog_button").append(reblogSvg);
                 });
                 $(".fuse-header .head-top").append( $(".fuse-header .head nav").clone() );
-                {block:IfSoundcloudWidgetURL}
-                    $.fuseSC({block:IfSoundcloudWidgetAutoplay}true{/block:IfSoundcloudWidgetAutoplay});
-                {/block:IfSoundcloudWidgetURL}
             });
             
             $antsIsoCont = $('#fuse-ants');
@@ -1548,10 +1503,6 @@
         });
         {/block:IfDribbbleWidgetAccessToken}
     </script>
-
-    {block:IfSoundcloudWidgetURL}
-        <div id="fuse-sc"></div>
-    {/block:IfSoundcloudWidgetURL}
 
     {block:Twitter}
         <script src="/tweets.js"></script>    
